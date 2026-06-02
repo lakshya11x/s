@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayushi Didi 🥺🥺🥺</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Noto+Sans+Devanagari:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #fdf6ee;
+  --rose: #c8506a;
+  --deep: #6b1a2e;
+  --wine: #3d0f1e;
+  --gold: #c9a96e;
+  --text: #2a0a12;
+  --muted: #8a6370;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--wine);
+  font-family:'DM Sans',sans-serif;
+  color:var(--cream);
+  overflow-x:hidden;
+  cursor:none;
+}
+/* GRAIN */
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9000;opacity:.7;
+}
+/* CURSOR */
+.cursor{position:fixed;width:10px;height:10px;background:var(--rose);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;}
+.cursor-ring{position:fixed;width:34px;height:34px;border:1px solid rgba(200,80,106,.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .1s ease;}
+/* PROGRESS */
+.progress-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--rose),var(--gold));z-index:1000;width:0%;transition:width .08s linear;}
+
+/* ══ SECTION 1: OPENING ══ */
+#opening{
+  height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 80% 65% at 50% 55%,#5a0f22 0%,var(--wine) 100%);
+}
+.petals-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.petal{position:absolute;opacity:0;animation:petalFall linear infinite;filter:blur(.3px);}
+@keyframes petalFall{
+  0%{transform:translateY(-60px) rotate(0deg);opacity:0;}
+  5%{opacity:.7;}95%{opacity:.3;}
+  100%{transform:translateY(110vh) rotate(720deg) translateX(30px);opacity:0;}
+}
+.open-eyebrow{
+  font-size:clamp(10px,2vw,12px);letter-spacing:6px;text-transform:uppercase;
+  color:var(--gold);opacity:0;animation:fadeUp 1s ease .4s forwards;margin-bottom:24px;
+}
+.open-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(54px,15vw,140px);font-weight:300;font-style:italic;
+  line-height:.9;text-align:center;color:var(--cream);
+  opacity:0;animation:fadeUp 1.2s ease .7s forwards;
+}
+.open-title span{display:block;color:var(--rose);font-weight:600;font-style:normal;font-size:clamp(36px,10vw,96px);}
+.open-didi{
+  font-family:'Noto Sans Devanagari',sans-serif;
+  font-size:clamp(16px,4.5vw,32px);color:var(--gold);
+  opacity:0;animation:fadeUp 1s ease 1.2s forwards;margin-top:20px;font-weight:300;letter-spacing:3px;
+}
+.scroll-hint{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  opacity:0;animation:fadeUp 1s ease 2.2s forwards;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:var(--muted);font-size:10px;letter-spacing:3px;text-transform:uppercase;
+}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--rose),transparent);animation:scrollPulse 2s ease-in-out infinite;}
+@keyframes scrollPulse{0%,100%{opacity:1;transform:scaleY(1);}50%{opacity:.3;transform:scaleY(.5);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+/* ══ SECTION 2: PHOTO GALLERY ══ */
+#photos{
+  background:linear-gradient(180deg,var(--wine) 0%,#130007 100%);
+  padding:100px 24px;
+  position:relative;overflow:hidden;
+}
+.photos-eyebrow{
+  text-align:center;
+  font-size:clamp(10px,2vw,12px);letter-spacing:6px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;
+  opacity:0;transform:translateY(20px);transition:all .7s ease;
+}
+.photos-eyebrow.visible{opacity:1;transform:translateY(0);}
+.photos-heading{
+  text-align:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(30px,8vw,68px);font-weight:300;font-style:italic;
+  color:var(--cream);margin-bottom:56px;
+  opacity:0;transform:translateY(24px);transition:all .8s ease .1s;
+}
+.photos-heading.visible{opacity:1;transform:translateY(0);}
+.photos-heading span{color:var(--rose);}
+
+.photo-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  max-width:780px;margin:0 auto;
+}
+@media(max-width:520px){.photo-grid{grid-template-columns:1fr;gap:12px;}}
+
+.photo-frame{
+  position:relative;overflow:hidden;border-radius:4px;
+  aspect-ratio:4/5;
+  background:#1a0009;
+  border:1px solid rgba(200,80,106,.15);
+  opacity:0;transform:translateY(30px) scale(.97);
+  transition:all .8s cubic-bezier(.22,1,.36,1);
+  cursor:pointer;
+}
+.photo-frame.visible{opacity:1;transform:translateY(0) scale(1);}
+.photo-frame:nth-child(2){transition-delay:.15s;}
+.photo-frame:hover .photo-img{transform:scale(1.06);}
+.photo-frame:hover .photo-overlay{opacity:1;}
+
+.photo-img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;transition:transform .6s ease;
+  filter:sepia(.12) saturate(1.1);
+}
+
+/* placeholder shown when no image uploaded */
+.photo-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:12px;
+  padding:24px;text-align:center;
+}
+.photo-placeholder-icon{font-size:40px;opacity:.4;}
+.photo-placeholder-text{
+  font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;
+}
+.photo-upload-btn{
+  margin-top:8px;padding:10px 20px;
+  background:rgba(200,80,106,.12);
+  border:1px solid rgba(200,80,106,.3);
+  color:var(--rose);border-radius:2px;
+  font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;
+}
+.photo-upload-btn:hover{background:rgba(200,80,106,.22);}
+.photo-input{display:none;}
+
+.photo-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(61,15,30,.85) 0%,transparent 50%);
+  opacity:.6;transition:opacity .4s;
+  display:flex;align-items:flex-end;padding:20px;
+}
+.photo-caption{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:clamp(15px,3.5vw,20px);
+  color:var(--cream);font-weight:300;
+}
+
+.photo-ornament{
+  text-align:center;margin-top:48px;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(17px,4vw,24px);color:var(--muted);
+  opacity:0;transform:translateY(16px);transition:all .7s ease .3s;
+}
+.photo-ornament.visible{opacity:1;transform:translateY(0);}
+
+/* ══ SECTION 3: SORRY REVEAL ══ */
+#sorry{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,#130007 0%,#080003 100%);
+  padding:100px 24px;position:relative;overflow:hidden;
+}
+.sorry-ghost{
+  position:absolute;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(90px,25vw,280px);font-weight:600;
+  color:transparent;-webkit-text-stroke:1px rgba(200,80,106,.12);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  white-space:nowrap;letter-spacing:-6px;user-select:none;pointer-events:none;
+}
+.sorry-inner{max-width:680px;width:100%;text-align:center;position:relative;z-index:2;}
+.sorry-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(24px,5.5vw,44px);font-style:italic;font-weight:300;
+  color:var(--cream);line-height:1.5;
+  opacity:0;transform:translateY(30px);transition:all .9s ease;
+}
+.sorry-quote.visible{opacity:1;transform:translateY(0);}
+.sorry-quote em{color:var(--rose);}
+.sorry-sub{
+  font-family:'Noto Sans Devanagari',sans-serif;
+  font-size:clamp(14px,3vw,18px);color:var(--muted);
+  margin-top:22px;line-height:1.9;font-weight:300;
+  opacity:0;transform:translateY(20px);transition:all .8s ease .2s;
+}
+.sorry-sub.visible{opacity:1;transform:translateY(0);}
+
+/* ══ SECTION 4: LETTER ══ */
+#letter{
+  background:var(--cream);color:var(--text);
+  padding:100px 24px;position:relative;overflow:hidden;
+}
+#letter::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--wine),var(--rose),var(--gold),var(--rose),var(--wine));
+}
+.letter-paper{
+  max-width:620px;margin:0 auto;
+  background:#fff;border-radius:2px;
+  padding:clamp(32px,8vw,72px) clamp(28px,7vw,64px);
+  box-shadow:0 4px 40px rgba(61,15,30,.1),0 1px 4px rgba(61,15,30,.06);
+  position:relative;
+}
+.letter-paper::before{
+  content:'';position:absolute;top:0;left:48px;
+  width:1px;height:100%;background:rgba(200,80,106,.1);
+}
+.letter-stamp{
+  position:absolute;top:24px;right:24px;
+  width:54px;height:66px;border:2px solid var(--rose);border-radius:3px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;opacity:.55;
+}
+.letter-stamp span:first-child{font-size:22px;line-height:1;}
+.letter-stamp span:last-child{font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--rose);font-family:'DM Sans',sans-serif;}
+.letter-date{font-size:12px;color:var(--muted);margin-bottom:28px;opacity:0;transform:translateY(14px);transition:all .6s ease;}
+.letter-date.visible{opacity:1;transform:translateY(0);}
+.letter-salutation{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5vw,32px);
+  font-style:italic;color:var(--rose);margin-bottom:24px;
+  opacity:0;transform:translateY(14px);transition:all .6s ease .1s;
+}
+.letter-salutation.visible{opacity:1;transform:translateY(0);}
+.letter-para{
+  font-family:'Noto Sans Devanagari',sans-serif;
+  font-size:clamp(14px,3.2vw,17px);line-height:2;color:#3a1520;
+  margin-bottom:18px;font-weight:400;
+  opacity:0;transform:translateY(14px);transition:all .6s ease;
+}
+.letter-para.visible{opacity:1;transform:translateY(0);}
+.letter-highlight{
+  border-left:3px solid var(--rose);padding:14px 18px;
+  background:#fff5f6;margin:24px 0;border-radius:0 5px 5px 0;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(16px,3.5vw,21px);font-style:italic;color:var(--deep);line-height:1.7;
+  opacity:0;transform:translateY(14px) translateX(-8px);transition:all .7s ease;
+}
+.letter-highlight.visible{opacity:1;transform:translateY(0) translateX(0);}
+.letter-sign{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(18px,4vw,26px);font-style:italic;color:var(--deep);
+  margin-top:32px;text-align:right;
+  opacity:0;transform:translateY(14px);transition:all .6s ease;
+}
+.letter-sign.visible{opacity:1;transform:translateY(0);}
+.letter-sign strong{display:block;font-weight:600;color:var(--rose);font-size:1.2em;font-style:normal;}
+
+/* ══ SECTION 5: MESSAGE FROM HEART ══ */
+#heart-msg{
+  background:linear-gradient(180deg,#080003 0%,#0e0008 100%);
+  padding:100px 24px;position:relative;overflow:hidden;
+}
+.hm-bg-text{
+  position:absolute;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(80px,20vw,200px);font-weight:600;
+  color:transparent;-webkit-text-stroke:1px rgba(200,80,106,.06);
+  bottom:-20px;right:-20px;user-select:none;pointer-events:none;white-space:nowrap;
+}
+.hm-inner{max-width:720px;margin:0 auto;position:relative;z-index:2;}
+.hm-eyebrow{
+  font-size:11px;letter-spacing:5px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;
+  opacity:0;transform:translateY(18px);transition:all .6s ease;
+}
+.hm-eyebrow.visible{opacity:1;transform:translateY(0);}
+.hm-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(34px,9vw,80px);font-weight:300;font-style:italic;
+  color:var(--cream);line-height:1.05;margin-bottom:48px;
+  opacity:0;transform:translateY(24px);transition:all .8s ease .1s;
+}
+.hm-title.visible{opacity:1;transform:translateY(0);}
+.hm-title span{color:var(--rose);font-style:normal;font-weight:600;}
+
+/* big quote block */
+.hm-quote-wrap{
+  position:relative;padding:40px 36px 40px 52px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(200,80,106,.14);
+  border-radius:2px;
+  opacity:0;transform:translateY(24px);transition:all .8s ease .15s;
+}
+.hm-quote-wrap.visible{opacity:1;transform:translateY(0);}
+.hm-quote-mark{
+  position:absolute;top:-10px;left:20px;
+  font-family:'Cormorant Garamond',serif;font-size:80px;
+  color:var(--rose);line-height:1;opacity:.3;
+}
+.hm-quote-text{
+  font-family:'Noto Sans Devanagari',sans-serif;
+  font-size:clamp(15px,3.5vw,20px);line-height:2.05;
+  color:rgba(253,246,238,.88);font-weight:400;
+}
+.hm-quote-text .accent{
+  color:var(--gold);font-style:italic;font-weight:500;
+}
+.hm-quote-text .rose{color:var(--rose);font-weight:500;}
+
+.hm-bless{
+  text-align:center;margin-top:48px;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(20px,5vw,36px);color:var(--gold);
+  opacity:0;transform:translateY(16px);transition:all .7s ease .2s;
+}
+.hm-bless.visible{opacity:1;transform:translateY(0);}
+
+/* ══ SECTION 6: REASONS ══ */
+#reasons{
+  background:#0a0004;padding:100px 24px;position:relative;overflow:hidden;
+}
+.reasons-heading{
+  text-align:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(30px,8vw,70px);font-weight:300;font-style:italic;
+  color:var(--cream);margin-bottom:72px;
+  opacity:0;transform:translateY(28px);transition:all .8s ease;
+}
+.reasons-heading.visible{opacity:1;transform:translateY(0);}
+.reasons-heading span{color:var(--rose);}
+.reasons-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:2px;max-width:900px;margin:0 auto;
+}
+.reason-card{
+  background:#160009;padding:36px 28px;
+  border:1px solid rgba(200,80,106,.08);
+  position:relative;overflow:hidden;
+  opacity:0;transform:translateY(28px);transition:all .7s ease;
+}
+.reason-card.visible{opacity:1;transform:translateY(0);}
+.reason-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(200,80,106,.07) 0%,transparent 70%);
+  opacity:0;transition:opacity .4s;
+}
+.reason-card:hover::before{opacity:1;}
+.reason-num{
+  font-family:'Cormorant Garamond',serif;font-size:68px;font-weight:300;
+  color:rgba(200,80,106,.07);position:absolute;top:6px;right:16px;line-height:1;
+}
+.reason-icon{font-size:26px;margin-bottom:14px;display:block;}
+.reason-title{
+  font-family:'Cormorant Garamond',serif;font-size:21px;font-style:italic;
+  color:var(--rose);margin-bottom:8px;
+}
+.reason-text{
+  font-family:'Noto Sans Devanagari',sans-serif;
+  font-size:clamp(13px,2.8vw,15px);color:rgba(253,246,238,.6);line-height:1.9;font-weight:300;
+}
+
+/* ══ SECTION 7: FINALE ══ */
+#finale{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  background:radial-gradient(ellipse 80% 70% at 50% 40%,#5a0f22 0%,#080003 100%);
+  padding:80px 24px;text-align:center;position:relative;overflow:hidden;
+}
+.finale-orbit{
+  position:absolute;border-radius:50%;border:1px solid rgba(200,80,106,.12);
+  width:clamp(280px,55vw,560px);height:clamp(280px,55vw,560px);
+  animation:rotateSlow 22s linear infinite;
+}
+.finale-orbit:nth-child(2){
+  width:clamp(180px,35vw,360px);height:clamp(180px,35vw,360px);
+  border-color:rgba(201,169,110,.09);animation-duration:15s;animation-direction:reverse;
+}
+@keyframes rotateSlow{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.finale-hearts{display:flex;gap:clamp(10px,2.5vw,20px);margin-bottom:44px;}
+.finale-heart{animation:heartPulse 1.7s ease-in-out infinite;font-size:clamp(26px,7vw,52px);filter:drop-shadow(0 0 10px rgba(200,80,106,.6));}
+.finale-heart:nth-child(2){animation-delay:.18s;font-size:clamp(34px,9vw,68px);}
+.finale-heart:nth-child(3){animation-delay:.36s;}
+@keyframes heartPulse{0%,100%{transform:scale(1);}14%{transform:scale(1.22);}30%{transform:scale(1);}44%{transform:scale(1.12);}}
+.finale-main{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(38px,11vw,110px);font-weight:600;
+  color:var(--cream);line-height:.95;position:relative;z-index:2;
+  opacity:0;transform:translateY(36px);transition:all 1s ease;
+}
+.finale-main.visible{opacity:1;transform:translateY(0);}
+.finale-main em{
+  display:block;color:var(--rose);font-style:italic;font-weight:300;
+  font-size:.62em;margin-top:10px;
+}
+.finale-hindi{
+  font-family:'Noto Sans Devanagari',sans-serif;
+  font-size:clamp(15px,3.5vw,22px);color:var(--gold);
+  margin-top:26px;font-weight:300;letter-spacing:2px;position:relative;z-index:2;
+  opacity:0;transform:translateY(18px);transition:all .8s ease .25s;
+}
+.finale-hindi.visible{opacity:1;transform:translateY(0);}
+.finale-from{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(17px,3.8vw,26px);font-style:italic;color:var(--muted);
+  margin-top:52px;position:relative;z-index:2;
+  opacity:0;transition:all .8s ease .45s;
+}
+.finale-from.visible{opacity:1;}
+.finale-from strong{color:var(--rose);font-style:normal;}
+
+/* reveal util */
+.reveal-el{}
+
+@media(max-width:480px){
+  .letter-paper::before{left:28px;}
+  .reasons-grid{grid-template-columns:1fr;}
+  .cursor,.cursor-ring{display:none;}
+  body{cursor:auto;}
+  .photo-grid{gap:10px;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ══ 1: OPENING ══ -->
+<section id="opening">
+  <div class="petals-bg" id="petalsBg"></div>
+  <div class="open-eyebrow">Please dekh lo</div>
+  <div class="open-title">
+    Sorry
+    <span>AYUSHI DIDI</span>
+  </div>
+  <div class="open-didi">Special apke liye ♡</div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Neeche scroll karo
+  </div>
+</section>
+
+
+<!-- ══ 3: SORRY REVEAL ══ -->
+<section id="sorry">
+  <div class="sorry-ghost">Sorry</div>
+  <div class="sorry-inner">
+    <div class="sorry-quote reveal-el">
+      "Mujhe pata hai ki meri baaton ne<br>
+      aapko <em>bahut hurt</em> kiya hai…"
+    </div>
+    <div class="sorry-sub reveal-el">
+      Didi me bhahut bhahut guity ho<br>
+      Yeh poori website sirf aapke liye bani hai, didi.
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4: LETTER ══ -->
+<section id="letter">
+  <div class="letter-paper">
+    <div class="letter-stamp">
+      <span>💗</span>
+      <span>Maafi</span>
+    </div>
+    <div class="letter-date reveal-el">June 2026</div>
+    <div class="letter-salutation reveal-el">Pyaari Ayushi Didi,</div>
+    <p class="letter-para reveal-el">Sabse pehle — aap theek ho na? </p>
+    <div class="letter-highlight reveal-el">"Mujhe pata hai ki meri baaton se aapko bahut hurt hua hai, aur is baat ka mujhe dil se afsos hai. Mera iraada kabhi bhi aapko dukh pahunchane ka nahi tha."</div>
+    <p class="letter-para reveal-el">Maine hamesha aapko sirf didi nahi, balki apni sachchi badi behen maana hai. Jo kuch hua, uske liye main sach mein sharminda hoon. Jab insaan mushkil waqt se guzarta hai, to kabhi-kabhi woh gusse mein aisi baatein bol deta hai jinka baad mein bahut pachtawa hota hai.</p>
+    <p class="letter-para reveal-el">Didi, maine zindagi mein shayad hi kisi se itni baar maafi maangi ho — kyunki aap mere liye ek sachchi aur achhi insaan hain, aur meri badi behen jaisi hain.</p>
+    <div class="letter-highlight reveal-el">"Agar aapne kabhi mujhe sachi me apna chhota bhai maana hai — toh ap mujhe joror maaf karogi"</div>
+    <!-- <p zclass="letter-para reveal-el">Bas itni si guzarish hai — <strong style="color:var(--rose);">mujhse naraz mat rahiye.</strong> Aapki maafi mere liye bahut maayne rakhti hai.</p> -->
+     <p class="letter-para reveal-el">Apne mujhe itna suppport kara. Har baar meri baat suni jab me pareshani me tha. Or Jab ap break hui toh mene sab kharab kar diya. </p>
+     <p class="letter-para reveal-el">Tu na selfish hai,Sirf khud Ke baare m sochta hai,Agle ki problem gayi bhaad m</p>
+     <p class="letter-para reveal-el">esa nhi hai didi, me khud problems me ho unstable hu overthink sab se ladta reheta hu apke saath jo hua hai woh mere saath bhi hua hai </p>
+     <p class="letter-para reveal-el">Please didi 🥺, mene bhi woh feel kiya jo ap feel karte ho jab sab sunnate hai and hurt karte hai. yeah mera last time maafi hai ap maaf karo ya nhi. me abh kabhi nhi apko pareshan nhi karunga.  </p>
+    <div class="letter-sign reveal-el">
+      Aapka,<br>
+      <strong>Chhota Bhai 💗</strong>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5: HEART MESSAGE ══ -->
+<section id="heart-msg">
+  <div class="hm-bg-text">God Bless</div>
+  <div class="hm-inner">
+    <!-- <div class="hm-eyebrow reveal-el">Dil se — Seedha Aapke liye</div> -->
+    <!-- <div class="hm-title reveal-el">Mera <span>Sachcha</span> Sandesh</div> -->
+
+    <div class="hm-quote-wrap reveal-el">
+      <div class="hm-quote-mark">"</div>
+      <p class="hm-quote-text">
+        Didi, aap ek <span class="accent">sachchi aur achhi insaan hain</span> — yeh baat main poori zindagi maanta rahunga.<br><br>
+        Agar aapne kabhi mujhe apna <span class="rose">chhota bhai maana hoga</span>, toh aap mujhe zaroor maaf karogi — kyunki meri badi behan ka dil bhahut bada hai.<br><br>
+        Please didi — main bahut <span class="rose">guilty</span> aur <span class="rose">sharminda</span> hoon apne kiye par. bale hi ap mujhe maaf na karo<br><br>
+        <span class="accent">God bless you, Didi.</span>  🌹
+      </p>
+    </div>
+
+    <div class="hm-bless reveal-el">✦ God Bless You, Ayushi Didi ✦</div>
+  </div>
+</section>
+
+<!-- ══ 6: REASONS ══ -->
+<section id="reasons">
+  <div class="reasons-heading reveal-el">Kyun aap <span>khaas</span> hain</div>
+  <div class="reasons-grid">
+    <div class="reason-card reveal-el">
+      <div class="reason-num">01</div>
+      <span class="reason-icon">🌸</span>
+      <div class="reason-title">Badi Behen</div>
+      <p class="reason-text">Aap sirf ek didi nahi — aap woh insaan hain jo kud pareshan ho kar bhi meri baat sunti ho. Yeh cheez rare hai.</p>
+    </div>
+    <div class="reason-card reveal-el">
+      <div class="reason-num">02</div>
+      <span class="reason-icon">💛</span>
+      <div class="reason-title">Sachchi Insaan</div>
+      <p class="reason-text">Aap sachchi aur achhi insaan hain — dil se. Aur main yeh hamesha maanta rahunga.</p>
+    </div>
+    <div class="reason-card reveal-el">
+      <div class="reason-num">03</div>
+      <span class="reason-icon">🕊️</span>
+      <div class="reason-title">Maafi ki Shakti</div>
+      <p class="reason-text">Jo maaf kar sake — woh sabse bada hota hai. Aur aap mujhe hamesha sab se badi lagti hain.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 7: FINALE ══ -->
+<section id="finale">
+  <div class="finale-orbit"></div>
+  <div class="finale-orbit"></div>
+  <div class="finale-hearts">
+    <div class="finale-heart">🤍</div>
+    <div class="finale-heart">❤️</div>
+    <div class="finale-heart">🤍</div>
+  </div>
+  <div class="finale-main reveal-el">
+    Didi
+    <em>Please Mujhe Maaf Kardo🥺</em>
+  </div>
+  <div class="finale-hindi reveal-el">— God Bless You, Hamesha —</div>
+  <div class="finale-from reveal-el">
+    Yeh poori website bani hai sirf <strong>aapke liye</strong> 🌹<br/>
+    didi me selfish nhi hu - bus har kisi se baat nhi kar pata
+  </div>
+</section>
+
+<script>
+// Cursor
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+setInterval(()=>{rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';},16);
+
+// Progress
+const bar=document.getElementById('progressBar');
+window.addEventListener('scroll',()=>{
+  const p=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
+  bar.style.width=p+'%';
+});
+
+// Scroll reveal
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const siblings=[...e.target.parentElement.querySelectorAll('.reveal-el')];
+      const idx=siblings.indexOf(e.target);
+      setTimeout(()=>e.target.classList.add('visible'),idx*100);
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal-el').forEach(el=>io.observe(el));
+
+// Petals
+const pb=document.getElementById('petalsBg');
+const emojis=['🌸','🌺','🌷','🌹','❀','✿'];
+for(let i=0;i<24;i++){
+  const p=document.createElement('div');
+  p.className='petal';
+  p.textContent=emojis[i%emojis.length];
+  p.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*8}%;font-size:${14+Math.random()*16}px;animation-duration:${7+Math.random()*9}s;animation-delay:${Math.random()*9}s;`;
+  pb.appendChild(p);
+}
+
+// Photo upload
+function loadPhoto(input,frameId,placeholderId,capId){
+  const file=input.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const frame=document.getElementById(frameId);
+    const ph=document.getElementById(placeholderId);
+    // remove placeholder
+    ph.style.display='none';
+    // create img
+    const img=document.createElement('img');
+    img.src=e.target.result;
+    img.className='photo-img';
+    frame.insertBefore(img,frame.querySelector('.photo-overlay'));
+  };
+  reader.readAsDataURL(file);
+}
+</script>
+</body>
+</html>
